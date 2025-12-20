@@ -544,7 +544,7 @@ export default function Home() {
             <div style={{ marginTop: '3rem', paddingTop: '1rem' }}>
               <div className="flex justify-center gap-6">
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/miguel-esteves-129879314"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
