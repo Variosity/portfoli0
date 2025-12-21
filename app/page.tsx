@@ -562,7 +562,7 @@ export default function Home() {
                   <Github className="w-6 h-6 text-zinc-400 hover:text-white transition-colors" />
                 </a>
                 <a
-                  href="https://twitter.com"
+                  href="https://x.com/migueljandro"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-blue-400/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
