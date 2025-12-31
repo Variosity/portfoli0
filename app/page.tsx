@@ -303,7 +303,7 @@ export default function Home() {
                 <li>• English (Native)</li>
                 <li>• Spanish (Native)</li>
                 <li>• Italian (Fluent)</li>
-                <li>• Roman Dialects</li>
+                <li>• Dialects</li>
               </ul>
             </motion.div>
           </motion.div>
