@@ -615,7 +615,7 @@ export default function Home() {
             <span className="text-red-500 font-semibold">
               Alejandro Fernandez
             </span>
-            . 2025.
+            . 2026.
           </p>
         </div>
       </footer>
