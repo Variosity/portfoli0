@@ -108,23 +108,23 @@ export default function Home() {
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
           >
             <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-600 to-orange-600">
-              Alejandro
+              Miguel
             </span>{" "}
-            <span className="text-white">Fernandez</span>
+            <span className="text-white">Esteves</span>
           </motion.h1>
 
           <motion.p
             variants={fadeInUp}
             className="text-xl sm:text-2xl md:text-3xl text-zinc-300 font-medium"
           >
-            Web Infrastructure Security <span className="text-zinc-600">|</span> Vulnerability Remediation
+            Full-Stack Software Engineer <span className="text-zinc-600">|</span> Systems & Security
           </motion.p>
 
           <motion.p
             variants={fadeInUp}
             className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed"
           >
-            I identify and patch critical security leaks in high-value business assets before the bad guys find them.
+            I build scalable, high-performance web applications and backend infrastructure with a secure-by-design mindset.
             <br />
             Operating Globally. Based in Central FL.
           </motion.p>
@@ -136,7 +136,7 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className="mt-6 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-full hover:from-red-500 hover:to-orange-500 shadow-lg shadow-red-500/20 hover:shadow-red-500/40"
           >
-            Secure Your Assets
+            View My Architecture
             <Shield className="w-5 h-5" />
           </motion.a>
         </motion.div>
@@ -180,7 +180,7 @@ export default function Home() {
               variants={fadeInUp}
               className="text-4xl sm:text-5xl font-bold mb-12 text-center"
             >
-              The <span className="text-red-500">Operative</span>
+              The <span className="text-red-500">Engineer</span>
             </motion.h2>
 
             <motion.div
@@ -216,7 +216,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl font-bold mb-16 text-center"
           >
-            Tactical <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-orange-600">Arsenal</span>
+            Technical <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-orange-600">Arsenal</span>
           </motion.h2>
 
           <motion.div
@@ -236,10 +236,10 @@ export default function Home() {
                 <Terminal className="w-10 h-10 text-red-500" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-red-400 text-center">
-                Offensive Security
+                Systems & Security
               </h3>
               <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• Kali Linux Env</li>
+                <li>• Custom Arch Linux Env</li>
                 <li>• Vuln Assessment</li>
                 <li>• OpSec Protocols</li>
                 <li>• Directory Patching</li>
@@ -277,7 +277,7 @@ export default function Home() {
                 <Zap className="w-10 h-10 text-indigo-500" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-indigo-400 text-center">
-                AI Warfare
+                AI Integration
               </h3>
               <ul className="space-y-3 text-zinc-300 text-center">
                 <li>• ComfyUI Workflows</li>
@@ -324,7 +324,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl font-bold mb-16 text-center"
           >
-            Deployment <span className="text-red-500">Protocols</span>
+            Engineering <span className="text-red-500">Focus</span>
           </motion.h2>
 
           <motion.div
@@ -402,7 +402,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl font-bold mb-16 text-center"
           >
-            Mission <span className="text-red-500">Log</span>
+            Deployed <span className="text-red-500">Architecture</span>
           </motion.h2>
 
           <motion.div
@@ -577,7 +577,7 @@ export default function Home() {
                   <Linkedin className="w-6 h-6 text-zinc-400 hover:text-blue-500 transition-colors" />
                 </a>
                 <a
-                  href="https://github.com/variosity"
+                  href="https://github.com/Variosity"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-white/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
