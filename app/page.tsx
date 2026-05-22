@@ -81,8 +81,8 @@ export default function Home() {
               <CheckCircle className="w-6 h-6 text-green-500" />
             </div>
             <div>
-              <h4 className="font-bold text-green-400">Transmission Secure</h4>
-              <p className="text-sm text-zinc-400">I will respond to your briefing shortly.</p>
+              <h4 className="font-bold text-green-400">Message Sent</h4>
+              <p className="text-sm text-zinc-400">I'll be in touch with you shortly.</p>
             </div>
             <button onClick={() => setShowPopup(false)} className="ml-4 text-zinc-500 hover:text-white">
               <X className="w-5 h-5" />
@@ -189,13 +189,12 @@ export default function Home() {
               className={`${baseCard} hover:border-red-500/30 p-8 sm:p-12 text-lg sm:text-xl leading-relaxed text-zinc-300 text-center font-light`}
             >
               <p>
-                I don't just build websites; I fortify them. With a background in <strong>Arch Linux</strong>, 
-                <strong> OpSec</strong>, and <strong>Full-Stack Architecture</strong>, I specialize in finding 
-                broken doors in your digital infrastructure and locking them tight. 
+                I don't just write code; I engineer resilient infrastructure. With a deep background in <strong>Systems Programming</strong>, 
+                <strong> Application Security</strong>, and <strong>Full-Stack Architecture</strong>, I specialize in building highly scalable platforms that are secure by design. 
                 <br /><br />
                 As a polyglot fluent in English, Spanish, and Italian, I bridge the gap between technical complexity 
-                and business reality. Whether it's patching a WordPress vulnerability or deploying an AI-driven defense 
-                protocol, I execute with military precision.
+                and business reality. Whether I am architecting a Golang microservice, deploying to Vercel and Supabase, 
+                or writing custom compilers in C, I execute with precision and a relentless drive to ship production-ready systems.
               </p>
             </motion.div>
           </motion.div>
@@ -226,81 +225,81 @@ export default function Home() {
             variants={staggerContainer}
             className="flex flex-wrap justify-center gap-6"
           >
-            {/* Systems & Security - PRIORITY 1 */}
+            {/* Backend & Systems */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-red-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
             >
               <div className="flex justify-center mb-6">
-                <Terminal className="w-10 h-10 text-red-500" />
+                <Server className="w-10 h-10 text-red-500" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-red-400 text-center">
-                Systems & Security
+                Backend & Systems
               </h3>
               <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• Custom Arch Linux Env</li>
-                <li>• Vuln Assessment</li>
-                <li>• OpSec Protocols</li>
-                <li>• Directory Patching</li>
+                <li>• Golang & C</li>
+                <li>• Node.js / TypeScript</li>
+                <li>• PostgreSQL & SQL</li>
+                <li>• REST API Architecture</li>
               </ul>
             </motion.div>
 
-            {/* Core Skills - PRIORITY 2 */}
+            {/* Cloud & Infrastructure */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-blue-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
             >
               <div className="flex justify-center mb-6">
-                <Server className="w-10 h-10 text-blue-500" />
+                <Globe className="w-10 h-10 text-blue-500" />
               </div>
-              <h3 className="text-xl font-bold mb-4 text-blue-400 text-center">Infrastructure</h3>
+              <h3 className="text-xl font-bold mb-4 text-blue-400 text-center">Cloud & DevOps</h3>
               <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• Next.js / React</li>
-                <li>• Python Automation</li>
-                <li>• Linux SysAdmin</li>
-                <li>• Cloud Security</li>
+                <li>• Docker / Compose</li>
+                <li>• GitHub Actions (CI/CD)</li>
+                <li>• Vercel & Supabase</li>
+                <li>• Arch Linux SysAdmin</li>
               </ul>
             </motion.div>
 
-            {/* AI & Automation - PRIORITY 3 */}
+            {/* Security & Automation */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-indigo-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
             >
               <div className="flex justify-center mb-6">
-                <Zap className="w-10 h-10 text-indigo-500" />
+                <Shield className="w-10 h-10 text-indigo-500" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-indigo-400 text-center">
-                AI Integration
+                Security & AI
               </h3>
               <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• ComfyUI Workflows</li>
+                <li>• OWASP Top 10</li>
+                <li>• Secure Authentication</li>
+                <li>• Python Automation</li>
                 <li>• LLM Integration</li>
-                <li>• Stable Diffusion</li>
-                <li>• Process Automation</li>
               </ul>
             </motion.div>
 
-            {/* Languages - PRIORITY 4 */}
+            {/* Frontend & Linguistics */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-green-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
             >
               <div className="flex justify-center mb-6">
-                <Languages className="w-10 h-10 text-green-500" />
+                <Terminal className="w-10 h-10 text-green-500" />
               </div>
               <h3 className="text-xl font-bold mb-4 text-green-400 text-center">
-                Linguistics
+                Frontend & Lingual
               </h3>
               <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• English (Native)</li>
-                <li>• Spanish (Native)</li>
+                <li>• React / Next.js</li>
+                <li>• Tailwind CSS</li>
+                <li>• English & Spanish</li>
                 <li>• Italian (Fluent)</li>
-                <li>• Dialects</li>
               </ul>
             </motion.div>
           </motion.div>
@@ -331,24 +330,24 @@ export default function Home() {
             variants={staggerContainer}
             className="flex flex-wrap justify-center gap-8"
           >
-            {/* Service 1 - Security Audit */}
+            {/* Service 1 - Backend */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-red-500/50 p-10 group w-full md:w-[calc(33.333%-22px)] max-w-md flex flex-col items-center`}
             >
               <div className="w-14 h-14 bg-red-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-all duration-500">
-                <Lock className="w-7 h-7 text-red-500" />
+                <Server className="w-7 h-7 text-red-500" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-red-400 text-center">
-                Vulnerability Remediation
+                Backend Infrastructure
               </h3>
               <p className="text-zinc-400 leading-relaxed text-base text-center">
-                I scan your site for exposed directories, broken SSL, and SQL injection points. Then I patch them immediately.
+                Architecting high-performance, containerized microservices and REST APIs using Golang, Node.js, and PostgreSQL.
               </p>
             </motion.div>
 
-             {/* Service 2 - AI Web */}
+             {/* Service 2 - Full-Stack */}
              <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
@@ -358,34 +357,34 @@ export default function Home() {
                 <Globe className="w-7 h-7 text-blue-500" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-blue-400 text-center">
-                Secure Architecture
+                Full-Stack Architecture
               </h3>
               <p className="text-zinc-400 leading-relaxed text-base text-center">
-                Building Next.js applications that are fast, SEO-optimized, and hardened against common web attacks from day one.
+                Building scalable web platforms leveraging Next.js, Vercel, and Supabase, engineered for speed and SEO.
               </p>
             </motion.div>
 
-            {/* Service 3 - Automation */}
+            {/* Service 3 - Security */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-indigo-500/50 p-10 group w-full md:w-[calc(33.333%-22px)] max-w-md flex flex-col items-center`}
             >
               <div className="w-14 h-14 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition-all duration-500">
-                <Cpu className="w-7 h-7 text-indigo-500" />
+                <Shield className="w-7 h-7 text-indigo-500" />
               </div>
               <h3 className="text-2xl font-bold mb-4 text-indigo-400 text-center">
-                Automated Defense
+                Secure By Design
               </h3>
               <p className="text-zinc-400 leading-relaxed text-base text-center">
-                Deploying custom AI agents to monitor systems or automate complex business workflows to increase efficiency.
+                Integrating Application Security directly into the deployment pipeline, preventing logic flaws and SQL injection vulnerabilities.
               </p>
             </motion.div>
           </motion.div>
         </div>
       </section>
 
-      {/* Projects Section - Framed as Security/Tech wins */}
+      {/* Projects Section */}
       <section
         id="projects"
         className="px-4 sm:px-6 lg:px-8 bg-zinc-950 w-full flex justify-center"
@@ -409,54 +408,54 @@ export default function Home() {
             variants={staggerContainer}
             className="flex flex-wrap justify-center gap-8"
           >
-            {/* Project 1 */}
+            {/* Project 1: Achlys */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-blue-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
             >
               <div className="w-full h-56 bg-gradient-to-br from-blue-600/10 to-indigo-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-blue-600/20 group-hover:to-indigo-600/20 transition-all duration-500">
-                <Globe className="w-20 h-20 text-blue-500/50 group-hover:text-blue-500 transition-colors" />
+                <Terminal className="w-20 h-20 text-blue-500/50 group-hover:text-blue-500 transition-colors" />
               </div>
               <h3 className="text-xl font-bold mb-3 text-blue-400 text-center">
-                Real Estate Portfolio Hardening
+                Achlys Programming Language
               </h3>
               <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Secured and optimized a staging platform network. Improved load times by 40% and patched exposed CMS entry points.
+                Designed a custom systems programming language. Built the parser, interpreter, and compiler architecture to manage systems-level operations.
               </p>
             </motion.div>
 
-            {/* Project 2 */}
+            {/* Project 2: HackLingo */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-indigo-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
             >
               <div className="w-full h-56 bg-gradient-to-br from-indigo-600/10 to-purple-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-indigo-600/20 group-hover:to-purple-600/20 transition-all duration-500">
-                <Cpu className="w-20 h-20 text-indigo-500/50 group-hover:text-indigo-500 transition-colors" />
+                <Globe className="w-20 h-20 text-indigo-500/50 group-hover:text-indigo-500 transition-colors" />
               </div>
               <h3 className="text-xl font-bold mb-3 text-indigo-400 text-center">
-                Local Business Digital Rescue
+                HackLingo Platform
               </h3>
               <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Complete overhaul of legacy infrastructure. Implemented secure forms and AI-driven customer lead capture.
+                Architected a full-stack, AI-assisted learning platform. Engineered secure authentication pipelines and scalable user-facing API integrations.
               </p>
             </motion.div>
 
-            {/* Project 3 */}
+            {/* Project 3: Go API */}
             <motion.div
               variants={fadeInUp}
               whileHover={{ scale: 1.02 }}
               className={`${baseCard} hover:border-red-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
             >
               <div className="w-full h-56 bg-gradient-to-br from-red-600/10 to-orange-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-red-600/20 group-hover:to-orange-600/20 transition-all duration-500">
-                <Shield className="w-20 h-20 text-red-500/50 group-hover:text-red-500 transition-colors" />
+                <Server className="w-20 h-20 text-red-500/50 group-hover:text-red-500 transition-colors" />
               </div>
               <h3 className="text-xl font-bold mb-3 text-red-400 text-center">
-                Bug Bounty & Recon
+                Secure Golang Microservice
               </h3>
               <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Active researcher on HackerOne. Specializing in identifying IDOR vulnerabilities and logic flaws in web apps.
+                Containerized REST API built with Go, PostgreSQL, and Docker. Features automated CI/CD pipelines via GitHub Actions and secure SQL parametrization.
               </p>
             </motion.div>
           </motion.div>
@@ -477,7 +476,7 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl sm:text-5xl font-bold mb-16 text-center"
           >
-            Initiate <span className="text-red-500">Protocol</span>
+            Get In <span className="text-red-500">Touch</span>
           </motion.h2>
 
           <motion.div
@@ -493,7 +492,7 @@ export default function Home() {
                   htmlFor="name"
                   className="block text-sm font-medium text-zinc-400 mb-3"
                 >
-                  Name / Organization
+                  Name
                 </label>
                 <input
                   type="text"
@@ -501,7 +500,7 @@ export default function Home() {
                   name="name"
                   required
                   className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all"
-                  placeholder="Identify yourself"
+                  placeholder="John Doe"
                 />
               </div>
 
@@ -510,7 +509,7 @@ export default function Home() {
                   htmlFor="email"
                   className="block text-sm font-medium text-zinc-400 mb-3"
                 >
-                  Comms Channel
+                  Email
                 </label>
                 <input
                   type="email"
@@ -518,7 +517,7 @@ export default function Home() {
                   name="email"
                   required
                   className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all"
-                  placeholder="secure@email.com"
+                  placeholder="john@example.com"
                 />
                 <ValidationError 
                   prefix="Email" 
@@ -533,7 +532,7 @@ export default function Home() {
                   htmlFor="message"
                   className="block text-sm font-medium text-zinc-400 mb-3"
                 >
-                  Mission Briefing
+                  Project Details
                 </label>
                 <textarea
                   id="message"
@@ -541,7 +540,7 @@ export default function Home() {
                   required
                   rows={6}
                   className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all resize-none"
-                  placeholder="Describe the vulnerability or project scope..."
+                  placeholder="How can I help you build?"
                 />
                 <ValidationError 
                   prefix="Message" 
@@ -556,7 +555,7 @@ export default function Home() {
                 disabled={state.submitting}
                 className="w-full px-6 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-xl hover:from-red-500 hover:to-orange-500 transition-all duration-300 shadow-lg shadow-red-500/20 hover:shadow-red-500/40 flex items-center justify-center gap-2 mt-8 mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {state.submitting ? "Establishing Connection..." : "Transmit Data"}
+                {state.submitting ? "Sending..." : "Send Message"}
                 {!state.submitting && <Send className="w-5 h-5" />}
               </button>
             </form>
