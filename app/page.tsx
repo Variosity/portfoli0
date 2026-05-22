@@ -126,6 +126,8 @@ export default function Home() {
           >
             I build scalable, high-performance web applications and backend infrastructure with a secure-by-design mindset.
             <br />
+            <br />
+            <br />
             Operating Globally. Based in Central FL.
           </motion.p>
 
@@ -435,7 +437,7 @@ export default function Home() {
                 <Globe className="w-20 h-20 text-indigo-500/50 group-hover:text-indigo-500 transition-colors" />
               </div>
               <h3 className="text-xl font-bold mb-3 text-indigo-400 text-center">
-                HackLingo Platform
+                Hacklingo Platform
               </h3>
               <p className="text-zinc-400 text-base leading-relaxed text-center">
                 Architected a full-stack, AI-assisted learning platform. Engineered secure authentication pipelines and scalable user-facing API integrations.
