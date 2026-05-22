@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Alejandro Fernandez | AI Solutions Architect & Full-Stack Engineer",
+  title: "Miguel Esteves | Full-Stack Engineer, Systems & Security",
   description: "AI Solutions Architect, Full-Stack Engineer, and Cybersecurity Specialist. Bridging the gap between complex systems and human needs.",
   keywords: ["AI Solutions", "Full-Stack Development", "Cybersecurity", "Next.js", "React", "Web Development"],
 };
