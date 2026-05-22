@@ -136,7 +136,7 @@ export default function Home() {
             whileTap={{ scale: 0.95 }}
             className="mt-6 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-full hover:from-red-500 hover:to-orange-500 shadow-lg shadow-red-500/20 hover:shadow-red-500/40"
           >
-            View My Architecture
+            Contact
             <Shield className="w-5 h-5" />
           </motion.a>
         </motion.div>
@@ -189,7 +189,7 @@ export default function Home() {
               className={`${baseCard} hover:border-red-500/30 p-8 sm:p-12 text-lg sm:text-xl leading-relaxed text-zinc-300 text-center font-light`}
             >
               <p>
-                I don't just build websites; I fortify them. With a background in <strong>Kali Linux</strong>, 
+                I don't just build websites; I fortify them. With a background in <strong>Arch Linux</strong>, 
                 <strong> OpSec</strong>, and <strong>Full-Stack Architecture</strong>, I specialize in finding 
                 broken doors in your digital infrastructure and locking them tight. 
                 <br /><br />
@@ -243,9 +243,6 @@ export default function Home() {
                 <li>• Vuln Assessment</li>
                 <li>• OpSec Protocols</li>
                 <li>• Directory Patching</li>
-                <li className="text-sm text-zinc-500">
-                  (Penetration Testing)
-                </li>
               </ul>
             </motion.div>
 
@@ -613,7 +610,7 @@ export default function Home() {
           <p>
             Secured & Engineered by{" "}
             <span className="text-red-500 font-semibold">
-              Alejandro Fernandez
+              Miguel Esteves
             </span>
             . 2026.
           </p>
