@@ -1,499 +1,399 @@
 "use client";
 
-import { motion, Variants, AnimatePresence } from "framer-motion";
-import {
-  Shield,
-  Zap,
-  Github,
-  Linkedin,
-  Twitter,
-  Mail,
-  Send,
-  Lock,
-  Globe,
-  Cpu,
-  Languages,
-  Terminal,
-  Server,
-  CheckCircle,
-  X
-} from "lucide-react";
+import { motion, AnimatePresence, Variants } from "framer-motion";
+import { Github, Linkedin, Twitter, Mail, Send, CheckCircle, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
-// --- ANIMATION VARIANTS ---
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: "easeOut" }
-  },
+import CustomCursor from "./components/CustomCursor";
+import SchematicField from "./components/SchematicField";
+import NavRail from "./components/NavRail";
+import BootHero from "./components/BootHero";
+import Counter from "./components/Counter";
+import RegistryRow, { Tag } from "./components/RegistryRow";
+
+const fadeUp: Variants = {
+  hidden: { opacity: 0, y: 24 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: { staggerChildren: 0.2, delayChildren: 0.1 },
+const STACK_LAYERS = [
+  {
+    tier: "01",
+    name: "Interface",
+    blurb: "The surface a user touches, when a project calls for one.",
+    tags: ["React", "Next.js", "TypeScript"],
   },
-};
+  {
+    tier: "02",
+    name: "API & Services",
+    blurb: "Where most of my time goes — request handling, concurrency, business logic.",
+    tags: ["Go", "Python", "FastAPI", "REST design", "Goroutines"],
+  },
+  {
+    tier: "03",
+    name: "Data",
+    blurb: "Schema design and storage that holds up under real usage.",
+    tags: ["PostgreSQL", "Redis", "Supabase"],
+  },
+  {
+    tier: "04",
+    name: "Infrastructure",
+    blurb: "Getting it built, containerized, and shipped without surprises.",
+    tags: ["Docker", "GitHub Actions", "Linux", "Vercel"],
+  },
+  {
+    tier: "05",
+    name: "Security",
+    blurb: "Secure-by-design habits carried over from application security work.",
+    tags: ["OWASP Top 10", "Auth & Access Control", "PortSwigger Academy"],
+  },
+];
 
-const popupVariants: Variants = {
-  hidden: { opacity: 0, y: 50, scale: 0.9 },
-  visible: { opacity: 1, y: 0, scale: 1 },
-  exit: { opacity: 0, y: 20, scale: 0.95 }
-};
+const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
+  {
+    index: "01",
+    name: "HackLingo",
+    description:
+      "A gamified information security learning platform — RPG-style progression across Red, Blue, and Purple team paths, with subscriptions and a native app shell.",
+    tags: [
+      { label: "AI-accelerated", tone: "ai" },
+      { label: "Full-stack", tone: "shipped" },
+      { label: "Shipped", tone: "shipped" },
+    ],
+    href: "https://hacklingo.tech",
+  },
+  {
+    index: "02",
+    name: "Excelsus",
+    description:
+      "A personal brand and agency system built around Jarvis, an AI assistant integrating Groq and Gemini with a voice bridge and a cold-outreach pipeline.",
+    tags: [
+      { label: "AI integration", tone: "ai" },
+      { label: "Automation", tone: "shipped" },
+    ],
+  },
+];
+
+const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
+  {
+    index: "03",
+    name: "Achlys",
+    description:
+      "A custom systems programming language, OS, and runtime built from scratch — prototyped in Rust, brought to production in C, and bootstrapped in two weeks. Hand-built the parser, interpreter, and AST evaluation model.",
+    tags: [
+      { label: "Solo-written", tone: "solo" },
+      { label: "C / Rust", tone: "solo" },
+      { label: "Systems", tone: "solo" },
+    ],
+    href: "https://achlyssys.vercel.app",
+  },
+  {
+    index: "04",
+    name: "Concurrent Port Scanner",
+    description:
+      "A multi-threaded TCP port scanner in Go using goroutines and WaitGroups, with a configurable worker pool and timeout handling.",
+    tags: [
+      { label: "Solo-written", tone: "solo" },
+      { label: "Go", tone: "solo" },
+      { label: "Concurrency", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity",
+  },
+  {
+    index: "05",
+    name: "AES Encrypt / Decrypt CLI",
+    description: "A command-line tool for symmetric encryption and decryption, written to understand the primitives rather than wrap a library blindly.",
+    tags: [
+      { label: "Solo-written", tone: "solo" },
+      { label: "Go", tone: "solo" },
+      { label: "Cryptography", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity",
+  },
+  {
+    index: "06",
+    name: "Secure REST API & HTTP Server",
+    description: "A hand-rolled HTTP server and REST API layer, built to internalize request routing and middleware before reaching for a framework.",
+    tags: [
+      { label: "Solo-written", tone: "solo" },
+      { label: "Go", tone: "solo" },
+      { label: "Backend", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity",
+  },
+  {
+    index: "07",
+    name: "AreteGuard",
+    description: "An OWASP-based security auditing tool for scanning applications against common web vulnerability classes.",
+    tags: [
+      { label: "Solo-written", tone: "solo" },
+      { label: "Security", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity",
+  },
+];
 
 export default function Home() {
-  // --- FORM LOGIC ---
-  // REPLACE "YOUR_FORM_ID" WITH THE ID YOU GOT FROM FORMSPREE
   const [state, handleSubmit] = useForm("xykyqryr");
-  
   const [showPopup, setShowPopup] = useState(false);
 
-  // Trigger popup when form is successfully sent
   useEffect(() => {
     if (state.succeeded) {
       setShowPopup(true);
-      // Auto-hide after 5 seconds
       const timer = setTimeout(() => setShowPopup(false), 5000);
       return () => clearTimeout(timer);
     }
   }, [state.succeeded]);
 
-  const baseCard = "bg-zinc-900/20 backdrop-blur-sm rounded-2xl border border-transparent hover:bg-zinc-900/40 transition-colors duration-300";
-
   return (
-    <main className="min-h-screen bg-zinc-950 text-white w-full overflow-x-hidden selection:bg-red-500/30">
-      
-      {/* --- NOTIFICATION POPUP --- */}
+    <main className="relative min-h-screen w-full selection:bg-[var(--amber)] selection:text-[#0a0e17]">
+      <CustomCursor />
+      <SchematicField />
+      <NavRail />
+
+      {/* Success toast */}
       <AnimatePresence>
         {showPopup && (
           <motion.div
-            initial="hidden"
-            animate="visible"
-            exit="exit"
-            variants={popupVariants}
-            className="fixed bottom-8 right-4 sm:right-8 z-50 bg-zinc-900 border border-green-500/50 text-white px-6 py-4 rounded-xl shadow-2xl shadow-green-900/20 flex items-center gap-4"
+            initial={{ opacity: 0, y: 40, scale: 0.95 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 20, scale: 0.95 }}
+            className="fixed bottom-6 right-4 z-[90] flex items-center gap-4 border border-[var(--cyan)]/50 bg-[var(--panel)] px-5 py-4 shadow-2xl sm:right-8"
           >
-            <div className="bg-green-500/20 p-2 rounded-full">
-              <CheckCircle className="w-6 h-6 text-green-500" />
-            </div>
+            <CheckCircle className="h-5 w-5 shrink-0 text-[var(--cyan)]" />
             <div>
-              <h4 className="font-bold text-green-400">Message Sent</h4>
-              <p className="text-sm text-zinc-400">I'll be in touch with you shortly.</p>
+              <p className="text-sm font-medium text-[var(--text)]">Message sent</p>
+              <p className="font-mono text-xs text-[var(--text-dim)]">I&apos;ll reply shortly.</p>
             </div>
-            <button onClick={() => setShowPopup(false)} className="ml-4 text-zinc-500 hover:text-white">
-              <X className="w-5 h-5" />
+            <button
+              onClick={() => setShowPopup(false)}
+              className="ml-2 text-[var(--text-faint)] hover:text-[var(--text)]"
+              aria-label="Dismiss"
+            >
+              <X className="h-4 w-4" />
             </button>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 sm:px-6 lg:px-8 w-full">
-        <div className="absolute inset-0 bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950 pointer-events-none">
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(220,38,38,0.05),transparent_60%)]" />
-        </div>
+      <div className="relative z-10">
+        <BootHero />
 
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={staggerContainer}
-          className="relative z-10 max-w-5xl mx-auto flex flex-col items-center text-center gap-5"
-        >
-          <motion.h1
-            variants={fadeInUp}
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold tracking-tight"
-          >
-            <span className="gradient-text bg-clip-text text-transparent bg-gradient-to-r from-red-500 via-red-600 to-orange-600">
-              Miguel
-            </span>{" "}
-            <span className="text-white">Esteves</span>
-          </motion.h1>
-
-          <motion.p
-            variants={fadeInUp}
-            className="text-xl sm:text-2xl md:text-3xl text-zinc-300 font-medium"
-          >
-            Full-Stack Software Engineer <span className="text-zinc-600">|</span> Systems & Security
-          </motion.p>
-
-          <motion.p
-            variants={fadeInUp}
-            className="text-base sm:text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed"
-          >
-            I build scalable, high-performance web applications and backend infrastructure with a secure-by-design mindset.
-            <br />
-            <br />
-            <br />
-            Operating Globally. Based in Central FL.
-          </motion.p>
-
-          <motion.a
-            variants={fadeInUp}
-            href="#contact"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="mt-6 inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-full hover:from-red-500 hover:to-orange-500 shadow-lg shadow-red-500/20 hover:shadow-red-500/40"
-          >
-            Contact
-            <Shield className="w-5 h-5" />
-          </motion.a>
-        </motion.div>
-
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity }}
-            className="w-6 h-10 rounded-full border border-zinc-700 flex justify-center opacity-60"
-          >
+        {/* SYSTEMS / ABOUT */}
+        <section id="systems" className="w-full px-6 py-28 sm:px-12 lg:pl-36 lg:pr-20">
+          <div className="mx-auto grid w-full max-w-4xl gap-12 lg:grid-cols-[1fr_auto] lg:items-start">
             <motion.div
-              animate={{ y: [0, 12, 0] }}
-              transition={{ duration: 1.5, repeat: Infinity }}
-              className="w-1 h-2 bg-red-500 rounded-full mt-2"
-            />
-          </motion.div>
-        </motion.div>
-      </section>
-
-      {/* About Section */}
-      <section
-        id="about"
-        className="px-4 sm:px-6 lg:px-8 w-full flex justify-center"
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
-      >
-        <div className="max-w-4xl w-full">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="w-full"
-          >
-            <motion.h2
-              variants={fadeInUp}
-              className="text-4xl sm:text-5xl font-bold mb-12 text-center"
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15% 0px" }}
+              variants={fadeUp}
             >
-              The <span className="text-red-500">Engineer</span>
+              <h2 className="font-display text-3xl font-medium text-[var(--text)] sm:text-4xl">
+                I build the parts users never see, and make sure they hold up.
+              </h2>
+              <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--text-dim)] sm:text-base">
+                My background runs through application security and bug bounty
+                methodology, which is why backend work, for me, starts from a
+                defensive posture rather than getting bolted on afterward. I work
+                primarily in Go and Python — concurrent services, database design,
+                REST APIs — and I&apos;m equally comfortable reading documentation
+                cold as I am shipping a full product end to end.
+              </p>
+              <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--text-dim)] sm:text-base">
+                Remote-native and multilingual, I&apos;ve worked independently
+                across time zones for most of my career, and I&apos;m comfortable
+                owning a feature from architecture to deployment without someone
+                looking over my shoulder.
+              </p>
+            </motion.div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15% 0px" }}
+              variants={fadeUp}
+              className="grid grid-cols-2 gap-x-10 gap-y-8 font-mono lg:grid-cols-1"
+            >
+              <div>
+                <div className="text-3xl text-[var(--amber)]">
+                  <Counter to={6} />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                  Languages spoken
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl text-[var(--amber)]">
+                  <Counter to={3} />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                  Products shipped end to end
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl text-[var(--amber)]">
+                  <Counter to={2} suffix=" wks" />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                  To bootstrap Achlys
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* STACK — layered diagram */}
+        <section id="stack" className="w-full px-6 py-28 sm:px-12 lg:pl-36 lg:pr-20">
+          <div className="mx-auto w-full max-w-4xl">
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15% 0px" }}
+              variants={fadeUp}
+              className="mb-14 font-display text-3xl font-medium text-[var(--text)] sm:text-4xl"
+            >
+              The stack, top to bottom.
             </motion.h2>
 
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.01 }}
-              className={`${baseCard} hover:border-red-500/30 p-8 sm:p-12 text-lg sm:text-xl leading-relaxed text-zinc-300 text-center font-light`}
-            >
-              <p>
-                I don't just write code; I engineer resilient infrastructure. With a deep background in <strong>Systems Programming</strong>, 
-                <strong> Application Security</strong>, and <strong>Full-Stack Architecture</strong>, I specialize in building highly scalable platforms that are secure by design. 
-                <br /><br />
-                As a polyglot fluent in English, Spanish, and Italian, I bridge the gap between technical complexity 
-                and business reality. Whether I am architecting a Golang microservice, deploying to Vercel and Supabase, 
-                or writing custom compilers in C, I execute with precision and a relentless drive to ship production-ready systems.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Skills Grid */}
-      <section
-        id="skills"
-        className="px-4 sm:px-6 lg:px-8 bg-zinc-950 w-full flex justify-center"
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
-      >
-        <div className="max-w-7xl w-full">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-16 text-center"
-          >
-            Technical <span className="bg-clip-text text-transparent bg-gradient-to-r from-red-400 to-orange-600">Arsenal</span>
-          </motion.h2>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="flex flex-wrap justify-center gap-6"
-          >
-            {/* Backend & Systems */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-red-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
-            >
-              <div className="flex justify-center mb-6">
-                <Server className="w-10 h-10 text-red-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-red-400 text-center">
-                Backend & Systems
-              </h3>
-              <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• Golang & C</li>
-                <li>• Node.js / TypeScript</li>
-                <li>• PostgreSQL & SQL</li>
-                <li>• REST API Architecture</li>
-              </ul>
-            </motion.div>
-
-            {/* Cloud & Infrastructure */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-blue-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
-            >
-              <div className="flex justify-center mb-6">
-                <Globe className="w-10 h-10 text-blue-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-blue-400 text-center">Cloud & DevOps</h3>
-              <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• Docker / Compose</li>
-                <li>• GitHub Actions (CI/CD)</li>
-                <li>• Vercel & Supabase</li>
-                <li>• Arch Linux SysAdmin</li>
-              </ul>
-            </motion.div>
-
-            {/* Security & Automation */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-indigo-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
-            >
-              <div className="flex justify-center mb-6">
-                <Shield className="w-10 h-10 text-indigo-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-indigo-400 text-center">
-                Security & AI
-              </h3>
-              <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• OWASP Top 10</li>
-                <li>• Secure Authentication</li>
-                <li>• Python Automation</li>
-                <li>• LLM Integration</li>
-              </ul>
-            </motion.div>
-
-            {/* Frontend & Linguistics */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-green-500/50 p-8 w-full md:w-[calc(50%-12px)] lg:w-[calc(25%-18px)] max-w-sm`}
-            >
-              <div className="flex justify-center mb-6">
-                <Terminal className="w-10 h-10 text-green-500" />
-              </div>
-              <h3 className="text-xl font-bold mb-4 text-green-400 text-center">
-                Frontend & Lingual
-              </h3>
-              <ul className="space-y-3 text-zinc-300 text-center">
-                <li>• React / Next.js</li>
-                <li>• Tailwind CSS</li>
-                <li>• English & Spanish</li>
-                <li>• Italian (Fluent)</li>
-              </ul>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Services Section */}
-      <section
-        id="services"
-        className="px-4 sm:px-6 lg:px-8 w-full flex justify-center"
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
-      >
-        <div className="max-w-7xl w-full">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-16 text-center"
-          >
-            Engineering <span className="text-red-500">Focus</span>
-          </motion.h2>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="flex flex-wrap justify-center gap-8"
-          >
-            {/* Service 1 - Backend */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-red-500/50 p-10 group w-full md:w-[calc(33.333%-22px)] max-w-md flex flex-col items-center`}
-            >
-              <div className="w-14 h-14 bg-red-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-red-500/20 transition-all duration-500">
-                <Server className="w-7 h-7 text-red-500" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-red-400 text-center">
-                Backend Infrastructure
-              </h3>
-              <p className="text-zinc-400 leading-relaxed text-base text-center">
-                Architecting high-performance, containerized microservices and REST APIs using Golang, Node.js, and PostgreSQL.
-              </p>
-            </motion.div>
-
-             {/* Service 2 - Full-Stack */}
-             <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-blue-500/50 p-10 group w-full md:w-[calc(33.333%-22px)] max-w-md flex flex-col items-center`}
-            >
-              <div className="w-14 h-14 bg-blue-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-all duration-500">
-                <Globe className="w-7 h-7 text-blue-500" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-blue-400 text-center">
-                Full-Stack Architecture
-              </h3>
-              <p className="text-zinc-400 leading-relaxed text-base text-center">
-                Building scalable web platforms leveraging Next.js, Vercel, and Supabase, engineered for speed and SEO.
-              </p>
-            </motion.div>
-
-            {/* Service 3 - Security */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-indigo-500/50 p-10 group w-full md:w-[calc(33.333%-22px)] max-w-md flex flex-col items-center`}
-            >
-              <div className="w-14 h-14 bg-indigo-500/10 rounded-xl flex items-center justify-center mb-6 group-hover:bg-indigo-500/20 transition-all duration-500">
-                <Shield className="w-7 h-7 text-indigo-500" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4 text-indigo-400 text-center">
-                Secure By Design
-              </h3>
-              <p className="text-zinc-400 leading-relaxed text-base text-center">
-                Integrating Application Security directly into the deployment pipeline, preventing logic flaws and SQL injection vulnerabilities.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Projects Section */}
-      <section
-        id="projects"
-        className="px-4 sm:px-6 lg:px-8 bg-zinc-950 w-full flex justify-center"
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
-      >
-        <div className="max-w-7xl w-full">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-16 text-center"
-          >
-            Deployed <span className="text-red-500">Architecture</span>
-          </motion.h2>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={staggerContainer}
-            className="flex flex-wrap justify-center gap-8"
-          >
-            {/* Project 1: Achlys */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-blue-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
-            >
-              <div className="w-full h-56 bg-gradient-to-br from-blue-600/10 to-indigo-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-blue-600/20 group-hover:to-indigo-600/20 transition-all duration-500">
-                <Terminal className="w-20 h-20 text-blue-500/50 group-hover:text-blue-500 transition-colors" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-blue-400 text-center">
-                Achlys Programming Language
-              </h3>
-              <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Designed a custom systems programming language. Built the parser, interpreter, and compiler architecture to manage systems-level operations.
-              </p>
-            </motion.div>
-
-            {/* Project 2: HackLingo */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-indigo-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
-            >
-              <div className="w-full h-56 bg-gradient-to-br from-indigo-600/10 to-purple-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-indigo-600/20 group-hover:to-purple-600/20 transition-all duration-500">
-                <Globe className="w-20 h-20 text-indigo-500/50 group-hover:text-indigo-500 transition-colors" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-indigo-400 text-center">
-                Hacklingo Platform
-              </h3>
-              <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Architected a full-stack, AI-assisted learning platform. Engineered secure authentication pipelines and scalable user-facing API integrations.
-              </p>
-            </motion.div>
-
-            {/* Project 3: Go API */}
-            <motion.div
-              variants={fadeInUp}
-              whileHover={{ scale: 1.02 }}
-              className={`${baseCard} hover:border-red-500/50 p-8 group w-full md:w-[calc(33.333%-22px)] max-w-md`}
-            >
-              <div className="w-full h-56 bg-gradient-to-br from-red-600/10 to-orange-600/10 rounded-xl mb-6 flex items-center justify-center group-hover:from-red-600/20 group-hover:to-orange-600/20 transition-all duration-500">
-                <Server className="w-20 h-20 text-red-500/50 group-hover:text-red-500 transition-colors" />
-              </div>
-              <h3 className="text-xl font-bold mb-3 text-red-400 text-center">
-                Secure Golang Microservice
-              </h3>
-              <p className="text-zinc-400 text-base leading-relaxed text-center">
-                Containerized REST API built with Go, PostgreSQL, and Docker. Features automated CI/CD pipelines via GitHub Actions and secure SQL parametrization.
-              </p>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Contact Section */}
-      <section
-        id="contact"
-        className="px-4 sm:px-6 lg:px-8 w-full flex justify-center"
-        style={{ paddingTop: '4rem', paddingBottom: '4rem' }}
-      >
-        <div className="max-w-4xl w-full">
-          <motion.h2
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeInUp}
-            className="text-4xl sm:text-5xl font-bold mb-16 text-center"
-          >
-            Get In <span className="text-red-500">Touch</span>
-          </motion.h2>
-
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, margin: "-50px" }}
-            variants={fadeInUp}
-            className={`${baseCard} hover:border-red-500/30 p-8 sm:p-12`}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div>
-                <label
-                  htmlFor="name"
-                  className="block text-sm font-medium text-zinc-400 mb-3"
+            <div className="border border-[var(--line)]">
+              {STACK_LAYERS.map((layer, i) => (
+                <motion.div
+                  key={layer.tier}
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: true, margin: "-10% 0px" }}
+                  variants={fadeUp}
+                  transition={{ delay: i * 0.05 }}
+                  data-cursor-hover
+                  className="group relative border-b border-[var(--line)] px-6 py-6 transition-colors last:border-b-0 hover:bg-[var(--panel)] sm:px-8 sm:py-7"
                 >
+                  <span className="absolute left-0 top-0 h-full w-[3px] scale-y-0 bg-[var(--amber)] transition-transform duration-300 origin-top group-hover:scale-y-100" />
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-baseline sm:justify-between sm:gap-8">
+                    <div className="flex items-baseline gap-4">
+                      <span className="font-mono text-xs text-[var(--text-faint)]">
+                        {layer.tier}
+                      </span>
+                      <h3 className="font-display text-lg font-medium text-[var(--text)] sm:text-xl">
+                        {layer.name}
+                      </h3>
+                    </div>
+                    <p className="max-w-md text-sm text-[var(--text-dim)] sm:text-right">
+                      {layer.blurb}
+                    </p>
+                  </div>
+                  <div className="mt-4 flex flex-wrap gap-2 pl-0 sm:pl-9">
+                    {layer.tags.map((t) => (
+                      <span
+                        key={t}
+                        className="border border-[var(--line-strong)] px-2.5 py-1 font-mono text-[11px] text-[var(--text-dim)] transition-colors group-hover:border-[var(--amber-dim)] group-hover:text-[var(--text)]"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* REGISTRY — projects */}
+        <section id="registry" className="w-full px-6 py-28 sm:px-12 lg:pl-36 lg:pr-20">
+          <div className="mx-auto w-full max-w-4xl">
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15% 0px" }}
+              variants={fadeUp}
+              className="mb-4 font-display text-3xl font-medium text-[var(--text)] sm:text-4xl"
+            >
+              Project registry.
+            </motion.h2>
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mb-14 max-w-lg text-sm text-[var(--text-dim)]"
+            >
+              Tagged by how each one was built — full products shipped with AI
+              tooling in the loop, and smaller systems work written by hand.
+            </motion.p>
+
+            <div className="mb-16">
+              <h3 className="mb-2 font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-faint)]">
+                Flagship — shipped products
+              </h3>
+              {FLAGSHIP.map((p) => (
+                <RegistryRow key={p.index} {...p} />
+              ))}
+            </div>
+
+            <div className="mb-16">
+              <h3 className="mb-2 font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-faint)]">
+                Systems work — hand-written, solo
+              </h3>
+              {SYSTEMS_WORK.map((p) => (
+                <RegistryRow key={p.index} {...p} />
+              ))}
+            </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="border-t border-[var(--line)] pt-6"
+            >
+              <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-faint)]">
+                Also on the bench
+              </h3>
+              <p className="text-sm leading-relaxed text-[var(--text-faint)]">
+                <span className="text-[var(--text-dim)]">PyrTyd</span> — an
+                experiment in giving AI assistants distinct personalities and
+                voices, part of the Jarvis toolchain.{" "}
+                <span className="text-[var(--text-dim)]">Halorust</span> — a
+                rapid, AI-assisted game build made to explore the genre rather
+                than to ship. Neither is core to how I work, but both are part
+                of how I explore.
+              </p>
+            </motion.div>
+          </div>
+        </section>
+
+        {/* CONTACT */}
+        <section id="contact" className="w-full px-6 py-28 sm:px-12 lg:pl-36 lg:pr-20">
+          <div className="mx-auto w-full max-w-2xl">
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-15% 0px" }}
+              variants={fadeUp}
+              className="mb-4 font-display text-3xl font-medium text-[var(--text)] sm:text-4xl"
+            >
+              Let&apos;s build something.
+            </motion.h2>
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="mb-12 text-sm text-[var(--text-dim)]"
+            >
+              Open to remote roles and contract work across time zones.
+            </motion.p>
+
+            <motion.form
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-10% 0px" }}
+              variants={fadeUp}
+              onSubmit={handleSubmit}
+              className="space-y-6"
+            >
+              <div>
+                <label htmlFor="name" className="mb-2 block font-mono text-xs uppercase tracking-wide text-[var(--text-faint)]">
                   Name
                 </label>
                 <input
@@ -501,16 +401,14 @@ export default function Home() {
                   id="name"
                   name="name"
                   required
-                  className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all"
-                  placeholder="John Doe"
+                  data-cursor-hover
+                  className="w-full border border-[var(--line-strong)] bg-transparent px-4 py-3 text-[var(--text)] outline-none transition-colors placeholder:text-[var(--text-faint)] focus:border-[var(--amber)]"
+                  placeholder="Jane Doe"
                 />
               </div>
 
               <div>
-                <label
-                  htmlFor="email"
-                  className="block text-sm font-medium text-zinc-400 mb-3"
-                >
+                <label htmlFor="email" className="mb-2 block font-mono text-xs uppercase tracking-wide text-[var(--text-faint)]">
                   Email
                 </label>
                 <input
@@ -518,105 +416,63 @@ export default function Home() {
                   id="email"
                   name="email"
                   required
-                  className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all"
-                  placeholder="john@example.com"
+                  data-cursor-hover
+                  className="w-full border border-[var(--line-strong)] bg-transparent px-4 py-3 text-[var(--text)] outline-none transition-colors placeholder:text-[var(--text-faint)] focus:border-[var(--amber)]"
+                  placeholder="jane@company.com"
                 />
-                <ValidationError 
-                  prefix="Email" 
-                  field="email"
-                  errors={state.errors}
-                  className="text-red-500 text-sm mt-1"
-                />
+                <ValidationError prefix="Email" field="email" errors={state.errors} className="mt-1 text-sm text-[var(--danger)]" />
               </div>
 
               <div>
-                <label
-                  htmlFor="message"
-                  className="block text-sm font-medium text-zinc-400 mb-3"
-                >
-                  Project Details
+                <label htmlFor="message" className="mb-2 block font-mono text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                  Project details
                 </label>
                 <textarea
                   id="message"
                   name="message"
                   required
-                  rows={6}
-                  className="w-full px-5 py-4 bg-zinc-900/50 border border-zinc-800 rounded-xl text-white placeholder-zinc-600 focus:outline-none focus:border-red-500/50 focus:ring-1 focus:ring-red-500/50 transition-all resize-none"
-                  placeholder="How can I help you build?"
+                  rows={5}
+                  data-cursor-hover
+                  className="w-full resize-none border border-[var(--line-strong)] bg-transparent px-4 py-3 text-[var(--text)] outline-none transition-colors placeholder:text-[var(--text-faint)] focus:border-[var(--amber)]"
+                  placeholder="What are you building?"
                 />
-                <ValidationError 
-                  prefix="Message" 
-                  field="message"
-                  errors={state.errors}
-                  className="text-red-500 text-sm mt-1"
-                />
+                <ValidationError prefix="Message" field="message" errors={state.errors} className="mt-1 text-sm text-[var(--danger)]" />
               </div>
 
               <button
                 type="submit"
                 disabled={state.submitting}
-                className="w-full px-6 py-4 bg-gradient-to-r from-red-600 to-orange-600 text-white font-semibold rounded-xl hover:from-red-500 hover:to-orange-500 transition-all duration-300 shadow-lg shadow-red-500/20 hover:shadow-red-500/40 flex items-center justify-center gap-2 mt-8 mb-4 disabled:opacity-50 disabled:cursor-not-allowed"
+                data-cursor-hover
+                className="inline-flex w-full items-center justify-center gap-2 border border-[var(--amber)] bg-[var(--amber)] px-6 py-4 font-medium text-[#0a0e17] transition-opacity hover:opacity-90 disabled:opacity-50 sm:w-auto"
               >
-                {state.submitting ? "Sending..." : "Send Message"}
-                {!state.submitting && <Send className="w-5 h-5" />}
+                {state.submitting ? "Sending…" : "Send message"}
+                {!state.submitting && <Send className="h-4 w-4" />}
               </button>
-            </form>
+            </motion.form>
 
-            {/* Social Links */}
-            <div style={{ marginTop: '3rem', paddingTop: '1rem' }}>
-              <div className="flex justify-center gap-6">
-                <a
-                  href="https://www.linkedin.com/in/miguel-esteves-129879314"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-blue-500/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
-                  aria-label="LinkedIn"
-                >
-                  <Linkedin className="w-6 h-6 text-zinc-400 hover:text-blue-500 transition-colors" />
-                </a>
-                <a
-                  href="https://github.com/Variosity"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-white/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
-                  aria-label="GitHub"
-                >
-                  <Github className="w-6 h-6 text-zinc-400 hover:text-white transition-colors" />
-                </a>
-                <a
-                  href="https://x.com/migueljandro"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-blue-400/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
-                  aria-label="Twitter/X"
-                >
-                  <Twitter className="w-6 h-6 text-zinc-400 hover:text-blue-400 transition-colors" />
-                </a>
-                <a
-                  href="mailto:alejandriosity@gmail.com"
-                  className="w-14 h-14 bg-zinc-900/40 rounded-xl flex items-center justify-center border border-zinc-800 hover:border-red-500/50 hover:bg-zinc-900 transition-all duration-300 hover:-translate-y-1"
-                  aria-label="Email"
-                >
-                  <Mail className="w-6 h-6 text-zinc-400 hover:text-red-500 transition-colors" />
-                </a>
-              </div>
+            <div className="mt-16 flex gap-5 border-t border-[var(--line)] pt-8">
+              <a href="https://www.linkedin.com/in/miguel-esteves-129879314" target="_blank" rel="noopener noreferrer" data-cursor-hover aria-label="LinkedIn" className="text-[var(--text-faint)] transition-colors hover:text-[var(--cyan)]">
+                <Linkedin className="h-5 w-5" />
+              </a>
+              <a href="https://github.com/Variosity" target="_blank" rel="noopener noreferrer" data-cursor-hover aria-label="GitHub" className="text-[var(--text-faint)] transition-colors hover:text-[var(--text)]">
+                <Github className="h-5 w-5" />
+              </a>
+              <a href="https://x.com/migueljandro" target="_blank" rel="noopener noreferrer" data-cursor-hover aria-label="Twitter/X" className="text-[var(--text-faint)] transition-colors hover:text-[var(--cyan)]">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="mailto:alejandriosity@gmail.com" data-cursor-hover aria-label="Email" className="text-[var(--text-faint)] transition-colors hover:text-[var(--amber)]">
+                <Mail className="h-5 w-5" />
+              </a>
             </div>
-          </motion.div>
-        </div>
-      </section>
+          </div>
+        </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 sm:px-6 lg:px-8 bg-zinc-950 w-full flex justify-center border-t border-zinc-900/50" style={{ marginTop: '2rem' }}>
-        <div className="max-w-7xl w-full text-center text-zinc-500 text-sm">
-          <p>
-            Secured & Engineered by{" "}
-            <span className="text-red-500 font-semibold">
-              Miguel Esteves
-            </span>
-            . 2026.
+        <footer className="w-full border-t border-[var(--line)] px-6 py-10 sm:px-12 lg:pl-36 lg:pr-20">
+          <p className="font-mono text-xs text-[var(--text-faint)]">
+            Miguel Esteves — engineered from Winter Garden, FL. 2026.
           </p>
-        </div>
-      </footer>
+        </footer>
+      </div>
     </main>
   );
 }

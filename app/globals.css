@@ -1,66 +1,133 @@
 @import "tailwindcss";
 
 :root {
-  --background: #09090b;
-  --foreground: #fafafa;
-  --accent-blue: #3b82f6;
-  --accent-indigo: #6366f1;
+  --bg: #0a0e17;
+  --bg-raised: #0e1420;
+  --panel: #10151f;
+  --line: rgba(230, 236, 250, 0.09);
+  --line-strong: rgba(230, 236, 250, 0.16);
+  --text: #e7eaf2;
+  --text-dim: #97a1b8;
+  --text-faint: #5b6478;
+  --amber: #ffb020;
+  --amber-dim: rgba(255, 176, 32, 0.35);
+  --cyan: #55d6e8;
+  --cyan-dim: rgba(85, 214, 232, 0.35);
+  --danger: #ff5c5c;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-bg: var(--bg);
+  --color-text: var(--text);
+  --font-display: var(--font-space-grotesk);
+  --font-mono: var(--font-plex-mono);
 }
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
 }
 
 html {
   scroll-behavior: smooth;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-space-grotesk), system-ui, sans-serif;
   overflow-x: hidden;
   width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
-#__next,
-html {
-  width: 100%;
-  margin: 0;
-  padding: 0;
+::selection {
+  background: var(--amber);
+  color: #0a0e17;
 }
 
-main {
-  width: 100%;
-  display: block;
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg);
+}
+::-webkit-scrollbar-thumb {
+  background: #1c2333;
+  border-radius: 0;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--amber-dim);
 }
 
-section:not(:first-child) {
-  width: 100%;
+.font-mono {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
 }
 
-/* Glassmorphism utility */
-.glass {
-  background: rgba(9, 9, 11, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+/* Blueprint grid texture */
+.grid-texture {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 48px 48px;
 }
 
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6 0%, #6366f1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+.grid-texture-fine {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 12px 12px;
+}
+
+/* Focus visibility */
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 3px;
+}
+
+/* Hide native cursor only when fine pointer + custom cursor active */
+@media (hover: hover) and (pointer: fine) {
+  .cursor-enabled {
+    cursor: none;
+  }
+}
+
+.blink-cursor::after {
+  content: "";
+  display: inline-block;
+  width: 0.55ch;
+  height: 1em;
+  background: var(--amber);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: blink 1s steps(1) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.text-glow {
+  text-shadow: 0 0 24px var(--amber-dim);
 }
