@@ -40,7 +40,7 @@ const STACK_LAYERS = [
     tier: "04",
     name: "Infrastructure",
     blurb: "Getting it built, containerized, and shipped without surprises.",
-    tags: ["Docker", "GitHub Actions", "Linux", "Vercel"],
+    tags: ["Docker", "GitHub Actions", "Linux", "Vercel", "Netlify"],
   },
   {
     tier: "05",
@@ -67,11 +67,12 @@ const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[];
     index: "02",
     name: "Excelsus",
     description:
-      "A personal brand and agency system built around Jarvis, an AI assistant integrating Groq and Gemini with a voice bridge and a cold-outreach pipeline.",
+      "A personal brand and agency system built around masculine excellence, chosen sufffering, and 0 excuses. Doubling as my personal freelancing Agency.",
     tags: [
       { label: "AI integration", tone: "ai" },
       { label: "Automation", tone: "shipped" },
     ],
+    href: "https://excelsus.live",
   },
 ];
 
@@ -82,7 +83,7 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
     description:
       "A custom systems programming language, OS, and runtime built from scratch — prototyped in Rust, brought to production in C, and bootstrapped in two weeks. Hand-built the parser, interpreter, and AST evaluation model.",
     tags: [
-      { label: "Solo-written", tone: "solo" },
+      { label: "Solo-written/AI-Assisted", tone: "solo" },
       { label: "C / Rust", tone: "solo" },
       { label: "Systems", tone: "solo" },
     ],
@@ -124,11 +125,12 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
   },
   {
     index: "07",
-    name: "AreteGuard",
-    description: "An OWASP-based security auditing tool for scanning applications against common web vulnerability classes.",
+    name: "ExcelsusAI",
+    description: "An AI assistant integrating Groq and Gemini with a voice bridge, Google APIs, access to web interface, and a cold-outreach pipeline.",
     tags: [
-      { label: "Solo-written", tone: "solo" },
-      { label: "Security", tone: "solo" },
+      { label: "AI-Assisted", tone: "solo" },
+      { label: "Automation Driven", tone: "solo" },
+      { label: "Agentic", tone: "solo" },
     ],
     href: "https://github.com/Variosity",
   },
