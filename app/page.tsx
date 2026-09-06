@@ -144,7 +144,7 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
       { label: "Automation Driven", tone: "solo" },
       { label: "Agentic", tone: "solo" },
     ],
-    href: "https://github.com/Variosity",
+    href: "https://github.com/Variosity/excelsus",
   },
 ];
 
