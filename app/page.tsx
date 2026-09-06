@@ -100,7 +100,7 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
       { label: "Go", tone: "solo" },
       { label: "Concurrency", tone: "solo" },
     ],
-    href: "https://github.com/Variosity",
+    href: "https://github.com/Variosity/go-concurrent-port-scanner",
   },
   {
     index: "05",
@@ -111,10 +111,21 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
       { label: "Go", tone: "solo" },
       { label: "Cryptography", tone: "solo" },
     ],
-    href: "https://github.com/Variosity",
+    href: "https://github.com/Variosity/go-aes-gcm",
   },
   {
     index: "06",
+    name: "AES Server",
+    description: "AES/GCM Symmetric Encryption/Decryption HTTP Server written in Go and HTML, written to ship the CLI tool as an accessible Full-Stack product.",
+    tags: [
+      { label: "Solo-written/AI-Assisted", tone: "solo" },
+      { label: "Go", tone: "solo"},
+      { label: "Backend/Crypto", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity/go-aes-server",
+  },
+  {
+    index: "07",
     name: "Secure REST API & HTTP Server",
     description: "A hand-rolled HTTP server and REST API layer, built to internalize request routing and middleware before reaching for a framework.",
     tags: [
@@ -122,10 +133,10 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
       { label: "Go", tone: "solo" },
       { label: "Backend", tone: "solo" },
     ],
-    href: "https://github.com/Variosity",
+    href: "https://github.com/Variosity/go-secure-api",
   },
   {
-    index: "07",
+    index: "08",
     name: "ExcelsusAI",
     description: "An AI assistant integrating Groq and Gemini with a voice bridge, Google APIs, access to web interface, and a cold-outreach pipeline.",
     tags: [
