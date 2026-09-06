@@ -53,7 +53,7 @@ const STACK_LAYERS = [
 const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
   {
     index: "01",
-    name: "HackLingo",
+    name: "Hacklingo",
     description:
       "A gamified information security learning platform — RPG-style progression across Red, Blue, and Purple team paths, with subscriptions and a native app shell.",
     tags: [
@@ -67,10 +67,11 @@ const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[];
     index: "02",
     name: "Excelsus",
     description:
-      "A personal brand and agency system built around masculine excellence, chosen sufffering, and 0 excuses. Doubling as my personal freelancing Agency.",
+      "A personal brand and agency system built around masculine excellence, elite community, chosen sufffering, and zero excuses. Doubling as my personal freelancing Agency.",
     tags: [
-      { label: "AI integration", tone: "ai" },
-      { label: "Automation", tone: "shipped" },
+      { label: "AI-accelerated", tone: "ai" },
+      { label: "Full-Stack", tone: "shipped" },
+      { label: "Shipped", tone: "shipped" },
     ],
     href: "https://excelsus.live",
   },
