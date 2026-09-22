@@ -1,16 +1,17 @@
 "use client";
 
+
 import { motion, AnimatePresence, Variants } from "framer-motion";
 import { Github, Linkedin, Twitter, Mail, Send, CheckCircle, X } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
-import CustomCursor from "./components/CustomCursor";
-import SchematicField from "./components/SchematicField";
-import NavRail from "./components/NavRail";
-import BootHero from "./components/BootHero";
-import Counter from "./components/Counter";
-import RegistryRow, { Tag } from "./components/RegistryRow";
+import CustomCursor from "../components/CustomCursor";
+import SchematicField from "../components/SchematicField";
+import NavRail from "../components/NavRail";
+import BootHero from "../components/BootHero";
+import Counter from "../components/Counter";
+import RegistryRow, { Tag } from "../components/RegistryRow";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
@@ -21,31 +22,31 @@ const STACK_LAYERS = [
   {
     tier: "01",
     name: "Interface",
-    blurb: "The surface a user touches, optimized for sub-second delivery.",
-    tags: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+    blurb: "The surface a user touches, when a project calls for one.",
+    tags: ["React", "Next.js", "TypeScript"],
   },
   {
     tier: "02",
     name: "API & Services",
-    blurb: "Where most of my time goes — request handling, routing, and application logic.",
-    tags: ["JavaScript", "TypeScript", "Node.js", "Express"],
+    blurb: "Where most of my time goes — request handling, concurrency, business logic.",
+    tags: ["Go", "Python", "FastAPI", "REST design", "Goroutines"],
   },
   {
     tier: "03",
     name: "Data",
-    blurb: "Relational schema design and storage that holds up under real usage.",
-    tags: ["PostgreSQL", "Supabase"],
+    blurb: "Schema design and storage that holds up under real usage.",
+    tags: ["PostgreSQL", "Redis", "Supabase"],
   },
   {
     tier: "04",
     name: "Infrastructure",
-    blurb: "Continuous integration and automated cloud deployment.",
-    tags: ["Vercel", "GitHub Actions", "Docker", "Linux"],
+    blurb: "Getting it built, containerized, and shipped without surprises.",
+    tags: ["Docker", "GitHub Actions", "Linux", "Vercel"],
   },
   {
     tier: "05",
     name: "Security",
-    blurb: "Secure-by-design habits carried over from application security self-study.",
+    blurb: "Secure-by-design habits carried over from application security work.",
     tags: ["OWASP Top 10", "Auth & Access Control", "PortSwigger Academy"],
   },
 ];
@@ -53,9 +54,9 @@ const STACK_LAYERS = [
 const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
   {
     index: "01",
-    name: "Hacklingo",
+    name: "HackLingo",
     description:
-      "A gamified information security learning platform — RPG-style progression across Red, Blue, and Purple team paths, built with a Node.js/TypeScript backend API layer and a Next.js client.",
+      "A gamified information security learning platform — RPG-style progression across Red, Blue, and Purple team paths, with subscriptions and a native app shell.",
     tags: [
       { label: "AI-accelerated", tone: "ai" },
       { label: "Full-stack", tone: "shipped" },
@@ -67,77 +68,52 @@ const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[];
     index: "02",
     name: "Excelsus",
     description:
-      "A personal brand and agency system for scalable freelance operations — client intake, automation, and a content pipeline.",
+      "A personal brand and agency system built around Jarvis, an AI assistant integrating Groq and Gemini with a voice bridge and a cold-outreach pipeline.",
     tags: [
-      { label: "AI-accelerated", tone: "ai" },
-      { label: "Full-Stack", tone: "shipped" },
-      { label: "Shipped", tone: "shipped" },
+      { label: "AI-assisted", tone: "ai" },
+      { label: "Automation", tone: "shipped" },
     ],
-    href: "https://excelsus.live",
   },
 ];
 
 const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
   {
     index: "03",
-    name: "ExcelsusAI",
+    name: "Achlys",
     description:
-      "An AI assistant integrating Groq and Gemini with a voice bridge, Google APIs, and a cold-outreach pipeline.",
+      "A custom systems programming language, OS, and runtime built from scratch — prototyped in Rust, brought to production in C, and bootstrapped in two weeks. Hand-built the parser, interpreter, and AST evaluation model.",
     tags: [
-      { label: "AI-Assisted", tone: "solo" },
-      { label: "Automation Driven", tone: "solo" },
-      { label: "Agentic", tone: "solo" },
-    ],
-    href: "https://github.com/Variosity/excelsus",
-  },
-  {
-    index: "04",
-    name: "Achlys Runtime Environment",
-    description:
-      "A custom systems programming language, OS, and runtime built from scratch — parser, interpreter, and AST evaluation model hand-built to study execution mechanics.",
-    tags: [
-      { label: "Systems Architecture", tone: "solo" },
-      { label: "Solo Exploration", tone: "solo" },
+      { label: "AI-assisted", tone: "solo" },
+      { label: "C / Rust", tone: "solo" },
+      { label: "Systems", tone: "solo" },
     ],
     href: "https://achlyssys.vercel.app",
   },
   {
-    index: "05",
+    index: "04",
     name: "Concurrent Port Scanner",
     description:
-      "A multi-threaded TCP port scanner in Go using goroutines and WaitGroups, with a configurable worker pool and timeout handling — written by hand, no AI tooling.",
+      "A multi-threaded TCP port scanner in Go using goroutines and WaitGroups, with a configurable worker pool and timeout handling.",
     tags: [
       { label: "Solo-written", tone: "solo" },
       { label: "Go", tone: "solo" },
       { label: "Concurrency", tone: "solo" },
     ],
-    href: "https://github.com/Variosity/go-concurrent-port-scanner",
+    href: "https://github.com/Variosity",
   },
   {
-    index: "06",
+    index: "05",
     name: "AES Encrypt / Decrypt CLI",
-    description:
-      "A command-line symmetric encryption tool written to understand the cryptographic primitives directly rather than wrap a library blindly.",
+    description: "A command-line tool for symmetric encryption and decryption, written to understand the primitives rather than wrap a library blindly.",
     tags: [
       { label: "Solo-written", tone: "solo" },
       { label: "Go", tone: "solo" },
       { label: "Cryptography", tone: "solo" },
     ],
-    href: "https://github.com/Variosity/go-aes-gcm",
+    href: "https://github.com/Variosity",
   },
   {
-    index: "07",
-    name: "AES Server",
-    description: "AES/GCM Symmetric Encryption/Decryption HTTP Server written in Go and HTML, written to ship the CLI tool as an accessible Full-Stack product.",
-    tags: [
-      { label: "Solo-written/AI-Assisted", tone: "solo" },
-      { label: "Go", tone: "solo"},
-      { label: "Backend/Crypto", tone: "solo" },
-    ],
-    href: "https://github.com/Variosity/go-aes-server",
-  },
-  {
-    index: "08",
+    index: "06",
     name: "Secure REST API & HTTP Server",
     description: "A hand-rolled HTTP server and REST API layer, built to internalize request routing and middleware before reaching for a framework.",
     tags: [
@@ -145,7 +121,7 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
       { label: "Go", tone: "solo" },
       { label: "Backend", tone: "solo" },
     ],
-    href: "https://github.com/Variosity/go-secure-api",
+    href: "https://github.com/Variosity",
   },
 ];
 
@@ -209,18 +185,17 @@ export default function Home() {
               </h2>
               <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--text-dim)] sm:text-base">
                 My background runs through application security and bug bounty
-                methodology, which is why full-stack work, for me, starts from a
+                methodology, which is why fullstack work, for me, starts from a
                 defensive posture rather than getting bolted on afterward. I work
-                primarily in the JavaScript/TypeScript ecosystem — building API
-                services, relational data models, and production-ready
-                applications end to end.
+                primarily in Go and Python — concurrent services, database design,
+                REST APIs — and I&apos;m equally comfortable reading documentation
+                cold as I am shipping a full product end to end.
               </p>
               <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--text-dim)] sm:text-base">
-                Remote-native and multilingual, I currently support technical
-                infrastructure for a real estate brokerage part-time while
-                building and shipping my own products, and I&apos;m comfortable
-                owning a feature from data modeling to deployment without
-                someone looking over my shoulder.
+                Remote-native and multilingual, I&apos;ve worked independently
+                across time zones for most of my career, and I&apos;m comfortable
+                owning a feature from architecture to deployment without someone
+                looking over my shoulder.
               </p>
             </motion.div>
 
@@ -245,6 +220,14 @@ export default function Home() {
                 </div>
                 <div className="mt-1 text-xs uppercase tracking-wide text-[var(--text-faint)]">
                   Products shipped end to end
+                </div>
+              </div>
+              <div>
+                <div className="text-3xl text-[var(--amber)]">
+                  <Counter to={2} suffix=" wks" />
+                </div>
+                <div className="mt-1 text-xs uppercase tracking-wide text-[var(--text-faint)]">
+                  To bootstrap Achlys
                 </div>
               </div>
             </motion.div>
@@ -325,9 +308,8 @@ export default function Home() {
               variants={fadeUp}
               className="mb-14 max-w-lg text-sm text-[var(--text-dim)]"
             >
-              Tagged by how each one was built — shipped products with AI tooling
-              in the loop, and smaller systems work written by hand to prove the
-              fundamentals underneath.
+              Tagged by how each one was built — full products shipped with AI
+              tooling in the loop, and smaller systems work written by hand.
             </motion.p>
 
             <div className="mb-16">
@@ -347,6 +329,27 @@ export default function Home() {
                 <RegistryRow key={p.index} {...p} />
               ))}
             </div>
+
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="border-t border-[var(--line)] pt-6"
+            >
+              <h3 className="mb-3 font-mono text-xs uppercase tracking-[0.14em] text-[var(--text-faint)]">
+                Also on the bench
+              </h3>
+              <p className="text-sm leading-relaxed text-[var(--text-faint)]">
+                <span className="text-[var(--text-dim)]">PyrTyd</span> — an
+                experiment in giving AI assistants distinct personalities and
+                voices, part of the ExcelsusAI toolchain.{" "}
+                <span className="text-[var(--text-dim)]">Halorust</span> — a
+                rapid, AI-assisted game build made to explore the genre rather
+                than to ship. Neither is core to how I work, but both are part
+                of how I explore.
+              </p>
+            </motion.div>
           </div>
         </section>
 
