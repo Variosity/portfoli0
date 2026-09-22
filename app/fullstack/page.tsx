@@ -79,11 +79,11 @@ const FLAGSHIP: { index: string; name: string; description: string; tags: Tag[];
 const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Tag[]; href?: string }[] = [
   {
     index: "03",
-    name: "Achlys",
+    name: "Achlys Runtime Environment",
     description:
       "A custom systems programming language, OS, and runtime built from scratch — prototyped in Rust, brought to production in C, and bootstrapped in two weeks. Hand-built the parser, interpreter, and AST evaluation model.",
     tags: [
-      { label: "AI-assisted", tone: "solo" },
+      { label: "AI-assisted", tone: "ai" },
       { label: "C / Rust", tone: "solo" },
       { label: "Systems", tone: "solo" },
     ],
@@ -91,6 +91,18 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
   },
   {
     index: "04",
+    name: "ExcelsusAI",
+    description:
+      "An AI assistant integrating Groq and Gemini with a piper tts voice bridge, Google APIs, and a cold-outreach pipeline.",
+    tags: [
+      { label: "AI-Assisted", tone: "ai" },
+      { label: "Automation Driven", tone: "solo" },
+      { label: "Agentic", tone: "ai" },
+    ],
+    href: "https://github.com/Variosity/excelsus",
+  },
+  {
+    index: "05",
     name: "Concurrent Port Scanner",
     description:
       "A multi-threaded TCP port scanner in Go using goroutines and WaitGroups, with a configurable worker pool and timeout handling.",
@@ -102,7 +114,7 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
     href: "https://github.com/Variosity",
   },
   {
-    index: "05",
+    index: "06",
     name: "AES Encrypt / Decrypt CLI",
     description: "A command-line tool for symmetric encryption and decryption, written to understand the primitives rather than wrap a library blindly.",
     tags: [
@@ -113,7 +125,18 @@ const SYSTEMS_WORK: { index: string; name: string; description: string; tags: Ta
     href: "https://github.com/Variosity",
   },
   {
-    index: "06",
+    index: "07",
+    name: "AES Server",
+    description: "AES/GCM Symmetric Encryption/Decryption HTTP Server written in Go and HTML, written to ship the CLI tool as an accessible Full-Stack product.",
+    tags: [
+      { label: "Solo-written/AI-Assisted", tone: "solo" },
+      { label: "Go", tone: "solo"},
+      { label: "Backend/Crypto", tone: "solo" },
+    ],
+    href: "https://github.com/Variosity/go-aes-server",
+  },
+  {
+    index: "08",
     name: "Secure REST API & HTTP Server",
     description: "A hand-rolled HTTP server and REST API layer, built to internalize request routing and middleware before reaching for a framework.",
     tags: [
@@ -187,7 +210,7 @@ export default function Home() {
                 My background runs through application security and bug bounty
                 methodology, which is why fullstack work, for me, starts from a
                 defensive posture rather than getting bolted on afterward. I work
-                primarily in Go and Python — concurrent services, database design,
+                primarily in Python & JS — concurrent services, database design,
                 REST APIs — and I&apos;m equally comfortable reading documentation
                 cold as I am shipping a full product end to end.
               </p>
