@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Space_Grotesk, IBM_Plex_Mono } from "next/font/google";
+import { Space_Grotesk, IBM_Plex_Mono, Cinzel, EB_Garamond } from "next/font/google";
 import "./globals.css";
 
 const spaceGrotesk = Space_Grotesk({
@@ -14,17 +14,30 @@ const plexMono = IBM_Plex_Mono({
   weight: ["400", "500", "600"],
 });
 
+const cinzel = Cinzel({
+  variable: "--font-cinzel",
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700", "900"],
+});
+
+const garamond = EB_Garamond({
+  variable: "--font-garamond",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  style: ["normal", "italic"],
+});
+
 export const metadata: Metadata = {
-  title: "Miguel Esteves — Backend Software Engineer, Systems & Security",
+  title: "Miguel Esteves — Engineer, Author, Founder",
   description:
-    "Backend software engineer specializing in Go and Python: concurrent systems, secure APIs, and infrastructure. Creator of Achlys (a language runtime) and HackLingo (a security learning platform).",
+    "Miguel Esteves — self-taught software engineer, author of Neo-Areticism, and founder of Excelsus Agency. Systems built with discipline; a path built on the same.",
   keywords: [
+    "Miguel Esteves",
+    "Alejandro Fernandez",
+    "Neo-Areticism",
+    "Excelsus Agency",
     "Backend Engineer",
-    "Golang Developer",
-    "Python Developer",
-    "Systems Programming",
-    "Application Security",
-    "Remote Software Engineer",
+    "Software Engineer",
   ],
 };
 
@@ -35,7 +48,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className="dark">
-      <body className={`${spaceGrotesk.variable} ${plexMono.variable} antialiased`}>
+      <body
+        className={`${spaceGrotesk.variable} ${plexMono.variable} ${cinzel.variable} ${garamond.variable} antialiased`}
+      >
         {children}
       </body>
     </html>

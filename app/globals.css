@@ -16,11 +16,32 @@
   --danger: #ff5c5c;
 }
 
+/* Underworld theme — scoped to the mythic hub (/) only.
+   The blueprint tokens above remain untouched for /fullstack. */
+.theme-underworld {
+  --void: #070402;
+  --void-raised: #0d0805;
+  --void-panel: #120a06;
+  --myth-line: rgba(184, 144, 63, 0.16);
+  --myth-line-strong: rgba(184, 144, 63, 0.32);
+  --bone: #ece2cd;
+  --ash: #8d7d6c;
+  --ash-faint: #4c4136;
+  --blood: #9c1c1c;
+  --blood-bright: #d1272c;
+  --ember: #ff6a2a;
+  --ember-soft: rgba(255, 106, 42, 0.35);
+  --gold: #b8902f;
+  --gold-bright: #e0b559;
+}
+
 @theme inline {
   --color-bg: var(--bg);
   --color-text: var(--text);
   --font-display: var(--font-space-grotesk);
   --font-mono: var(--font-plex-mono);
+  --font-inscribed: var(--font-cinzel);
+  --font-codex: var(--font-garamond);
 }
 
 @layer base {
@@ -130,4 +151,65 @@ textarea:focus-visible {
 
 .text-glow {
   text-shadow: 0 0 24px var(--amber-dim);
+}
+
+/* ---------- Underworld theme ---------- */
+
+.theme-underworld {
+  background: var(--void);
+  color: var(--bone);
+}
+
+.theme-underworld ::selection {
+  background: var(--blood-bright);
+  color: var(--bone);
+}
+
+.theme-underworld a:focus-visible,
+.theme-underworld button:focus-visible,
+.theme-underworld input:focus-visible,
+.theme-underworld textarea:focus-visible {
+  outline: 2px solid var(--ember);
+  outline-offset: 3px;
+}
+
+.font-inscribed {
+  font-family: var(--font-cinzel), "Trajan Pro", serif;
+}
+
+.font-codex {
+  font-family: var(--font-garamond), "EB Garamond", Georgia, serif;
+}
+
+/* Breathing flame glow behind the hero mark */
+@keyframes flame-breathe {
+  0%,
+  100% {
+    transform: scale(1) translateY(0);
+    opacity: 0.55;
+  }
+  50% {
+    transform: scale(1.12) translateY(-1.5%);
+    opacity: 0.85;
+  }
+}
+
+.flame-breathe {
+  animation: flame-breathe 6.5s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flame-breathe {
+    animation: none;
+  }
+}
+
+/* Fine ash grain, used behind panels for texture without an image asset */
+.ash-grain {
+  background-image: radial-gradient(var(--myth-line) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+.underworld-glow-text {
+  text-shadow: 0 0 32px var(--ember-soft), 0 0 64px rgba(156, 28, 28, 0.25);
 }

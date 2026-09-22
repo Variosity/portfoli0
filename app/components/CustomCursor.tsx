@@ -2,7 +2,15 @@
 
 import { useEffect, useRef, useState } from "react";
 
-export default function CustomCursor() {
+export default function CustomCursor({
+  dotColor = "var(--amber)",
+  ringColor = "var(--amber)",
+  idleRingColor = "var(--line-strong)",
+}: {
+  dotColor?: string;
+  ringColor?: string;
+  idleRingColor?: string;
+}) {
   const dotRef = useRef<HTMLDivElement>(null);
   const ringRef = useRef<HTMLDivElement>(null);
   const [enabled, setEnabled] = useState(false);
@@ -58,7 +66,8 @@ export default function CustomCursor() {
     <>
       <div
         ref={dotRef}
-        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--amber)]"
+        className="pointer-events-none fixed left-0 top-0 z-[100] h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full"
+        style={{ background: dotColor }}
       />
       <div
         ref={ringRef}
@@ -66,7 +75,7 @@ export default function CustomCursor() {
         style={{
           width: active ? 56 : 28,
           height: active ? 56 : 28,
-          borderColor: active ? "var(--amber)" : "var(--line-strong)",
+          borderColor: active ? ringColor : idleRingColor,
         }}
       />
     </>
