@@ -124,7 +124,7 @@ const LANGUAGES = [
   { name: "English", level: "Fluent" },
   { name: "Spanish", level: "Fluent" },
   { name: "Italian", level: "Fluent" },
-  { name: "French", level: "Intermediate" },
+  { name: "Neapolitan", level: "Intermediate" },
   { name: "Portuguese", level: "Intermediate" },
   { name: "Catalan", level: "Intermediate" },
 ];
