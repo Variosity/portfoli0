@@ -28,9 +28,9 @@ const garamond = EB_Garamond({
 });
 
 export const metadata: Metadata = {
-  title: "Miguel Esteves — Engineer, Author, Founder",
+  title: "Miguel Esteves — Systems & Infrastructure Engineer",
   description:
-    "Miguel Esteves — self-taught software engineer, author of Neo-Areticism, and founder of Excelsus Agency. Systems built with discipline; a path built on the same.",
+    "Miguel Esteves — Systems & Infrastructure Engineer. Systems built with discipline; a path built on the same.",
   keywords: [
     "Miguel Esteves",
     "Alejandro Fernandez",
@@ -38,6 +38,20 @@ export const metadata: Metadata = {
     "Excelsus Agency",
     "Backend Engineer",
     "Software Engineer",
+    "Infrastructure Engineer",
+    "Systems Engineer",
+    "LLMOps",
+    "Triage",
+    "Application Security",
+    "Escalation",
+    "Application Support",
+    "Backend Support",
+    "Developer",
+    "L2/L3",
+    "Python",
+    "Go",
+    "SQL",
+    "Linux",
   ],
 };
 
