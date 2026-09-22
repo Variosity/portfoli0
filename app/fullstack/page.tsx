@@ -209,8 +209,7 @@ export default function Home() {
               <p className="mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--text-dim)] sm:text-base">
                 My background runs through application security and bug bounty
                 methodology, which is why fullstack work, for me, starts from a
-                defensive posture rather than getting bolted on afterward. I work
-                primarily in Python & JS — concurrent services, database design,
+                defensive posture rather than getting bolted on afterward. Concurrent services, database design,
                 REST APIs — and I&apos;m equally comfortable reading documentation
                 cold as I am shipping a full product end to end.
               </p>
