@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowDown, Mail } from "lucide-react";
 
 const LINES = [
-  { prompt: "$ whoami", output: "miguel_esteves — backend engineer, systems & security" },
-  { prompt: "$ status --stack", output: "go · python · postgres · docker  →  ready" },
+  { prompt: "$ whoami", output: "miguel_esteves — fullstack engineer, systems & infrastructure" },
+  { prompt: "$ status --stack", output: "javascript · react · node · python · postgres · docker  →  ready" },
   { prompt: "$ deploy --profile production", output: "secure by design. shipped end-to-end." },
 ];
 
@@ -90,7 +90,7 @@ export default function BootHero() {
             Miguel Esteves
           </h1>
           <p className="mt-5 max-w-xl text-lg text-[var(--text-dim)] sm:text-xl">
-            Backend software engineer building concurrent systems, secure APIs, and
+            Fullstack software engineer building concurrent systems, secure APIs, and
             infrastructure in Go and Python.
           </p>
 
