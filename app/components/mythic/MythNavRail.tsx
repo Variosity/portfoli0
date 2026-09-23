@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react";
 
 const SECTIONS = [
-  { id: "threshold", label: "Threshold" },
-  { id: "record", label: "The Record" },
-  { id: "arsenal", label: "The Arsenal" },
-  { id: "forge", label: "The Forge" },
-  { id: "rite", label: "The Rite" },
+  { id: "threshold", label: "Threshold", numeral: "I" },
+  { id: "record", label: "The Record", numeral: "II" },
+  { id: "arsenal", label: "The Arsenal", numeral: "III" },
+  { id: "forge", label: "The Forge", numeral: "IV" },
+  { id: "rite", label: "The Rite", numeral: "V" },
 ];
 
 export default function MythNavRail() {
@@ -36,7 +36,7 @@ export default function MythNavRail() {
         aria-label="Section navigation"
         className="fixed left-6 top-1/2 z-40 hidden -translate-y-1/2 lg:block"
       >
-        <ul className="flex flex-col items-start gap-5">
+        <ul className="flex flex-col items-start gap-6">
           {SECTIONS.map((s) => (
             <li key={s.id}>
               <a
@@ -46,12 +46,11 @@ export default function MythNavRail() {
                 aria-current={active === s.id ? "true" : undefined}
               >
                 <span
-                  className="h-[6px] w-[6px] rounded-full transition-all duration-300"
-                  style={{
-                    background: active === s.id ? "var(--ember)" : "var(--ash-faint)",
-                    boxShadow: active === s.id ? "0 0 0 3px var(--ember-soft)" : "none",
-                  }}
-                />
+                  className="font-inscribed text-xs transition-colors duration-300"
+                  style={{ color: active === s.id ? "var(--ember)" : "var(--ash-faint)" }}
+                >
+                  {s.numeral}
+                </span>
                 <span
                   className="font-codex text-[13px] italic tracking-wide transition-all duration-300"
                   style={{
@@ -79,12 +78,12 @@ export default function MythNavRail() {
         <ul className="flex gap-4">
           {SECTIONS.map((s) => (
             <li key={s.id}>
-              <a href={`#${s.id}`}>
-                <span
-                  className="block h-[6px] w-[6px] rounded-full"
-                  style={{ background: active === s.id ? "var(--ember)" : "var(--ash-faint)" }}
-                  aria-label={s.label}
-                />
+              <a
+                href={`#${s.id}`}
+                className="font-inscribed text-[11px]"
+                style={{ color: active === s.id ? "var(--ember)" : "var(--ash-faint)" }}
+              >
+                {s.numeral}
               </a>
             </li>
           ))}

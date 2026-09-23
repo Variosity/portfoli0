@@ -1,13 +1,12 @@
 "use client";
 
 import { motion, AnimatePresence, useScroll, useTransform, Variants } from "framer-motion";
-import { ArrowDown, Github, Linkedin, Twitter, Mail, Send, CheckCircle, X, ArrowUpRight } from "lucide-react";
+import { ArrowDown, Flame, Github, Linkedin, Twitter, Mail, Send, CheckCircle, X, ArrowUpRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 import { useForm, ValidationError } from "@formspree/react";
 
 import CustomCursor from "./components/CustomCursor";
 import EmberField from "./components/mythic/EmberField";
-import FireLayer from "./components/mythic/FireLayer";
 import MythNavRail from "./components/mythic/MythNavRail";
 import FuseProgress from "./components/mythic/FuseProgress";
 import TiltCard from "./components/mythic/TiltCard";
@@ -186,19 +185,17 @@ export default function Home() {
         <section
           id="threshold"
           ref={heroRef}
-          className="relative flex min-h-screen w-full flex-col justify-center overflow-hidden px-6 sm:px-12 lg:pl-36 lg:pr-20"
+          className="relative flex min-h-screen w-full flex-col items-center justify-center overflow-hidden px-6 text-center sm:px-12"
         >
-          <FireLayer />
-
           <motion.div
             style={{ y: heroY, opacity: heroOpacity }}
-            className="relative z-10 mx-auto w-full max-w-4xl"
+            className="relative z-10 mx-auto w-full max-w-3xl"
           >
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut" }}
-              className="font-codex text-lg italic text-[var(--gold-bright)] sm:text-xl"
+              className="font-codex text-sm italic tracking-[0.2em] text-[var(--gold-bright)]"
             >
               Systems &amp; Infrastructure Engineer
             </motion.p>
@@ -207,7 +204,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
-              className="underworld-glow-text mt-3 font-inscribed text-[15vw] font-bold leading-[0.95] tracking-tight text-[var(--bone)] sm:text-7xl lg:text-8xl"
+              className="underworld-glow-text mt-3 font-inscribed text-5xl font-bold leading-[0.95] tracking-tight text-[var(--bone)] sm:text-7xl lg:text-8xl"
             >
               Miguel Esteves
             </motion.h1>
@@ -216,7 +213,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              className="mt-7 max-w-xl font-codex text-lg leading-relaxed text-[var(--ash)] sm:text-xl"
+              className="mx-auto mt-7 max-w-xl font-codex text-lg italic leading-relaxed text-[var(--ash)] sm:text-xl"
             >
               Systems-oriented engineer across Python, SQL, and Linux —
               concurrent systems, REST APIs, and security automation, backed
@@ -228,7 +225,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.55 }}
-              className="mt-7 flex flex-wrap gap-2"
+              className="mt-7 flex flex-wrap justify-center gap-2"
             >
               {FOCUS_ROLES.map((r) => (
                 <span
@@ -244,14 +241,15 @@ export default function Home() {
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.7 }}
-              className="mt-10 flex flex-wrap items-center gap-4"
+              className="mt-10 flex flex-wrap items-center justify-center gap-5"
             >
               <a
                 href="#rite"
                 data-cursor-hover
-                className="group inline-flex items-center gap-2 border border-[var(--ember)] px-6 py-3 font-codex text-base text-[var(--ember)] transition-colors hover:bg-[var(--ember)] hover:text-[var(--void)]"
+                className="group inline-flex items-center gap-2 border border-[var(--ember)] px-7 py-3 font-codex text-base text-[var(--ember)] transition-colors hover:bg-[var(--ember)] hover:text-[var(--void)]"
               >
-                Get in touch
+                <Flame className="h-4 w-4" />
+                Summon
               </a>
               <a
                 href="#record"
